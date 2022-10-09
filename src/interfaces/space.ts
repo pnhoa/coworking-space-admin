@@ -1,0 +1,32 @@
+export interface Space {
+  id: number
+  createdDate?: string
+  modifiedDate?: string
+  createdBy?: string
+  modifiedBy?: string
+  name: string
+  brand?: string
+  shortDescription?: string
+  description: string
+  price: number
+  unit: number
+  largeImage?: string
+  address?: string
+  country?: string
+  province?: string
+  district?: string
+  minPrice: number
+  maxPrice: number
+  numberOfRoom: number
+  acreage: number
+  electricPrice: number
+  waterPrice: number
+  status: boolean
+  approved: boolean
+  notApproved: boolean
+  xCoordinate: number
+  yCoordinate: number
+  discount: number
+  ratingAverage: number
+  categoryId: number
+}
