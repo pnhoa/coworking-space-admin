@@ -10,7 +10,6 @@ interface Props {
 }
 
 const { Option } = Select
-const { TextArea } = Input
 
 const SpaceForm: FC<Props> = ({ item, extraItem }) => {
 
@@ -66,17 +65,17 @@ const SpaceForm: FC<Props> = ({ item, extraItem }) => {
           />
         </Form.Item>
       </Col>
-      <Col span={24}>
+      <Col span={12}>
         <Form.Item
-          name='description'
-          label='Description'
-          rules={[{ required: true, message: 'Please enter description' }]}
+          name='unit'
+          label='Unit'
+          rules={[{ required: true, message: 'Please enter unit' }]}
         >
-          <TextArea rows={7} placeholder='Enter description ...' />
+          <Input placeholder='Please enter unit' />
         </Form.Item>
       </Col>
       <Col span={24}>
-        <FormUploadImage name='thumbnail' label='Thumbnail' />
+        <FormUploadImage name='largeImage' label='Thumbnail' />
       </Col>
     </Row>
   )

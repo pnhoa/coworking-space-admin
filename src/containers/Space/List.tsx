@@ -2,7 +2,6 @@ import { Image, Pagination } from 'antd'
 import Table, { ColumnsType } from 'antd/lib/table'
 import categoryApi from 'api/categoryApi'
 import spaceApi from 'api/spaceApi'
-import CreateButton from 'components/actions/CreateButton'
 import DeleteButton from 'components/actions/DeleteButton'
 import EditButton from 'components/actions/EditButton'
 import GroupActions from 'components/common/GroupActions'
@@ -258,9 +257,6 @@ const SpaceList: FC = () => {
           provinceList={provinceList}
           districtList={districtList}
         />
-        <div className='flex-center-end'>
-          <CreateButton handleClick={() => setCreateProps({ visible: true })} />
-        </div>
         <Table
           style={{ marginTop: '10px' }}
           dataSource={spaceList}

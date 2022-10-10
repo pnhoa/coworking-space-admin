@@ -30,11 +30,12 @@ const EditSpaceModal: FC<Props> = ({
   useEffect(() => {
     form.setFieldsValue({
       name: space?.name,
-      brand: space?.brand,
       categoryId: space?.categoryId,
-      description: space?.description,
       price: space?.price,
       numberOfRoom: space?.numberOfRoom,
+      largeImage: "https://www.freeimages.com/photo/windows-1213732",
+      unit: space?.unit,
+      discount: space?.discount,
     })
   }, [form, space])
 
@@ -46,6 +47,8 @@ const EditSpaceModal: FC<Props> = ({
         const formValues = {
           ...values,
           id: space?.id,
+          userId: Number(localStorage.getItem('id')),
+          discount: space?.discount,
         }
         return await spaceApi.update(formValues)
       })
