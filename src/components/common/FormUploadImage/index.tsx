@@ -1,7 +1,6 @@
 import { Form, Image, Input } from 'antd'
 import { get } from 'lodash'
 import { useContext, useEffect, useState } from 'react'
-import { getBase64StringFromDataURL } from 'utils/tools'
 import { FormContextCustom } from '../../context/FormContextCustom'
 
 interface Props {
@@ -13,14 +12,14 @@ const FormUploadImage = ({ name, label }: Props) => {
   const { record, form } = useContext(FormContextCustom)
 
   const [base64Url, setBase64Url] = useState(
-    record ? `data:image/jpeg;base64,${get(record, name)}` : null
+    record ? get(record, name) : null
   )
 
   useEffect(() => {
     form.setFields([
       {
         name: name,
-        value: getBase64StringFromDataURL(base64Url),
+        value: base64Url,
       },
     ])
   }, [base64Url]) // eslint-disable-line
