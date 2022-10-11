@@ -91,7 +91,7 @@ const CustomerList: FC = () => {
       width: 120,
       render: (data: any) => (
         <Image
-          src={data ? `data:image/jpeg;base64,${data}` : `no-data.jpeg`}
+          src={data ? data : `no-data.jpeg`}
           alt='image'
           style={{
             width: '60px',

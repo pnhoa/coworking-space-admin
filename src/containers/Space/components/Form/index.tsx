@@ -75,7 +75,7 @@ const SpaceForm: FC<Props> = ({ item, extraItem }) => {
         </Form.Item>
       </Col>
       <Col span={24}>
-        <FormUploadImage name='largeImage' label='Thumbnail' />
+        <FormUploadImage name='largeImage' label='largeImage' />
       </Col>
     </Row>
   )
