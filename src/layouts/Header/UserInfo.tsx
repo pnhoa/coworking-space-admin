@@ -73,7 +73,7 @@ function UserInfo() {
             size='large'
             src={
               profile?.profilePicture
-                ? `data:image/jpeg;base64,${profile?.profilePicture}`
+                ? profile?.profilePicture
                 : 'default-avatar.jpeg'
             }
             icon={<UserOutlined />}
