@@ -29,4 +29,7 @@ export interface Space {
   discount: number
   ratingAverage: number
   categoryId: number
+  paid: boolean
+  expired: boolean
+  expiredDate: Date
 }
