@@ -9,6 +9,7 @@ import { flatMap, map } from 'lodash'
 import { Redirect, Switch } from 'react-router-dom'
 import { IBasePrivateRoute, IPrivateRoute, TPrivateRoutes } from 'routes/interface'
 import PrivateRoute from './PrivateRoute'
+import ServicePackList from 'containers/ServicePack/List'
 
 const routes: TPrivateRoutes = [
   {
@@ -34,6 +35,12 @@ const routes: TPrivateRoutes = [
     Component: CategoryList,
     exact: true,
     title: 'Categories',
+  },
+  {
+    path: '/servicePacks',
+    Component: ServicePackList,
+    exact: true,
+    title: 'servicePacks',
   },
   {
     path: '/customers',

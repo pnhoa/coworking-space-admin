@@ -4,6 +4,7 @@ import {
   TeamOutlined,
   BuildOutlined,
   UserOutlined,
+  InteractionOutlined,
 } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 import employeeApi from 'api/employeeApi'
@@ -60,6 +61,12 @@ const SideBar: FC = () => {
       text: 'Categories',
       IconCPN: BarsOutlined,
       url: '/categories',
+    },
+    {
+      key: 'servicePacks',
+      text: 'Service Packs',
+      IconCPN: InteractionOutlined,
+      url: '/servicePacks',
     },
     {
       key: 'customers',
