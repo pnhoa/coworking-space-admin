@@ -1,4 +1,4 @@
-import { Image, Table } from 'antd'
+import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import servicePackApi from 'api/servicePackApi'
 import CreateButton from 'components/actions/CreateButton'
