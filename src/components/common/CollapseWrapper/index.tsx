@@ -1,7 +1,6 @@
-import { FC, ReactNode, useState } from 'react'
+import { FC, ReactNode} from 'react'
 import { Row, Col } from 'antd'
 import CollapseWrapperStyles from './styles'
-import ToggleButton from 'components/actions/ToggleButton'
 
 interface Props {
   leftComponent: ReactNode
@@ -13,15 +12,10 @@ interface Props {
 const CollapseWrapper: FC<Props> = ({
   leftComponent,
   rightComponent,
-  leftSpan = 6,
-  rightSpan = 18,
+  leftSpan = 12,
+  rightSpan = 12,
 }) => {
-  const [isCollapse, setIsCollapse] = useState(false)
-
-  const handleToggle = () => {
-    setIsCollapse(!isCollapse)
-  }
-
+  
   return (
     <CollapseWrapperStyles>
       <Row gutter={20} className='row-collapsed-detail' wrap={false}>
@@ -30,14 +24,14 @@ const CollapseWrapper: FC<Props> = ({
           lg={leftSpan}
           md={24}
           xs={24}
-          className={`col-info ${isCollapse ? 'collapsed-container' : ''}`}
+          className={`col-info}`}
         >
           {leftComponent}
         </Col>
 
         <Col
-          xl={isCollapse ? 24 : rightSpan}
-          lg={isCollapse ? 24 : rightSpan}
+          xl={rightSpan}
+          lg={rightSpan}
           md={24}
           xs={24}
           className='col-right'
@@ -45,7 +39,7 @@ const CollapseWrapper: FC<Props> = ({
           {rightComponent}
         </Col>
       </Row>
-      <ToggleButton isCollapse={isCollapse} handleToggle={handleToggle} />
+      
     </CollapseWrapperStyles>
   )
 }
