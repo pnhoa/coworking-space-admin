@@ -3,7 +3,7 @@ import Table, { ColumnsType } from 'antd/lib/table'
 import categoryApi from 'api/categoryApi'
 import spaceApi from 'api/spaceApi'
 import DeleteButton from 'components/actions/DeleteButton'
-import EditButton from 'components/actions/EditButton'
+import ViewButton from 'components/actions/ViewButton'
 import GroupActions from 'components/common/GroupActions'
 import PageTitle from 'components/common/PageTitle'
 import { Category, ListParams, ListResponse, PaginationParams, Space } from 'interfaces'
@@ -13,7 +13,6 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { formatCategoryById, formatExpiredDate, formatPrice, formatSpacePaid } from 'utils/textUtils'
 import ApprovedSelect from './components/ApprovedSelect'
 import StatusSelect from './components/StatusSelect'
-import CreateSpaceModal from './Create'
 import EditSpaceModal from './Edit'
 import SpaceFilter from './Filter'
 import ListLayoutStyles from './styles'
@@ -33,9 +32,6 @@ const SpaceList: FC = () => {
     total: 20,
   })
   const [loading, setLoading] = useState(true)
-  const [createProps, setCreateProps] = useState({
-    visible: false,
-  })
   const [editProps, setEditProps] = useState({
     visible: false,
     id: undefined,
@@ -227,6 +223,11 @@ const SpaceList: FC = () => {
       title: 'Paid',
       dataIndex: 'paid',
       width: 90,
+      filters: [
+        { text: 'Yes', value: true },
+        { text: 'No', value: false },
+      ],
+      onFilter: (value, record) => record.paid === value,
       render: (data) => formatSpacePaid(data),
     },
 
@@ -240,20 +241,25 @@ const SpaceList: FC = () => {
     },
 
     {
+      title: 'Expired',
+      dataIndex: 'expired',
+      width: 90,
+      filters: [
+        { text: 'Yes', value: true },
+        { text: 'No', value: false },
+      ],
+      onFilter: (value, record) => record.expired === value,
+      render: (data) => formatSpacePaid(data),
+    },
+
+    {
       fixed: 'right',
       width: 80,
       dataIndex: 'id',
       key: 'id',
       render: (data) => (
         <GroupActions>
-          <EditButton
-            handleClick={() =>
-              setEditProps({
-                visible: true,
-                id: data,
-              })
-            }
-          />
+          <ViewButton id={data} />
           <DeleteButton customTitle='Space' deleteItem={() => handleDeleteSpace(data)} />
         </GroupActions>
       ),
@@ -291,12 +297,7 @@ const SpaceList: FC = () => {
             defaultPageSize={20}
           />
         </div>
-        <CreateSpaceModal
-          refetch={() => setRefetch(!refetch)}
-          extraResource={categoryList}
-          visible={createProps.visible}
-          closeModal={() => setCreateProps({ visible: false })}
-        />
+     
         <EditSpaceModal
           id={editProps.id}
           resource={spaceList}
