@@ -1,4 +1,4 @@
-import { ApiResponse, ListParams, ListResponse, Space } from 'interfaces'
+import { ApiResponse, ListParams, ListResponse, Space, SpaceDetail } from 'interfaces'
 import axiosClient from './axiosClient'
 
 const spaceApi = {
@@ -27,7 +27,7 @@ const spaceApi = {
     }
   },
 
-  getById(id: number): Promise<Space> {
+  getById(id: number): Promise<SpaceDetail> {
     const url = `/spaces/${id}`
     return axiosClient.get(url)
   },

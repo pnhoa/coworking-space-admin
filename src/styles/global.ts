@@ -7,6 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     background: #ffffff;
     border-radius: 16px;
     padding: 20px;
-    margin: 5px;
+    margin-bottom: 20px;
   }
 `

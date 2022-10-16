@@ -58,9 +58,7 @@ export const formatDate = (text?: string) => {
 export const formatExpiredDate = (text?: string) => {
   if (!text) return null
   const dateTime = moment(text)
-  return dateTime.isSame(moment(), 'year')
-    ? dateTime.format(`MMM D`)
-    : dateTime.format(`MMM D YYYY`)
+  return  dateTime.format(`MMM D YYYY`)
 }
 
 export const formatMoneySymbol = (num?: number | string, digits = 3) => {

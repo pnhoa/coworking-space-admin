@@ -5,15 +5,15 @@ import CollapseWrapperStyles from './styles'
 interface Props {
   leftComponent: ReactNode
   rightComponent: ReactNode
-  leftSpan?: number
-  rightSpan?: number
+  leftSpan: number
+  rightSpan: number
 }
 
 const CollapseWrapper: FC<Props> = ({
   leftComponent,
   rightComponent,
-  leftSpan = 12,
-  rightSpan = 12,
+  leftSpan,
+  rightSpan,
 }) => {
   
   return (

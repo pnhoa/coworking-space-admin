@@ -12,6 +12,16 @@ const SpaceOverviewDetailInfo: FC = () => {
     record: SpaceDetail
   }
 
+  const spaceOperationTimeSort = record.spaceOperationTimes.sort((a, b) => a.id - b.id)
+
+  const operationHours = spaceOperationTimeSort.map(item => ({
+    day: item.day,
+    time: item.closeTime === item.openTime ? 'Closed' : item.openTime.substring(0,2) + ':' + item.openTime.substring(2,4) + '-' + item.closeTime.substring(0,2) + ':' + item.closeTime.substring(2,4)
+  }))
+
+  const images: string[] = [record.largeImage ? record.largeImage : 'no-data.jpeg'] 
+  record?.images.forEach(item => {images.push(item.url)})
+
   return (
     <SpaceOverviewInfoStyles className='box-wrapper'>
       <BoxTitle title={`Space Overview`} extraAction={null} />
@@ -22,7 +32,7 @@ const SpaceOverviewDetailInfo: FC = () => {
           <Col span={3} className='fw-500'>Images</Col>
           
           <Col span={12} >
-            <ImageSlider images={record?.images}  />
+            <ImageSlider  images={images}  />
           </Col>
         </Row>
         
@@ -75,6 +85,15 @@ const SpaceOverviewDetailInfo: FC = () => {
           <Col span={5} >
             {record?.waterPrice || 'N/A'}
           </Col>
+        </Row>
+
+        <Row gutter={20}>
+          <Col span={3} className='fw-500'>Operation Hours</Col>
+          {operationHours.map((item) => (
+            <Col key={item.day} span={3} >
+              {item.day + ':    ' + item.time || 'N/A'}
+            </Col>
+        ))}
         </Row>
 
       </div>

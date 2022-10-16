@@ -63,8 +63,9 @@ export interface SpaceDetail {
   spaceAmenity: SpaceAmenity
   spaceAddress: SpaceAddress
   spaceOperationTimes: SpaceOperationTime[]
-  serviceSpaces: ServiceSpace
+  serviceSpaces: ServiceSpace[]
   images: Image[]
+  spacePayments: SpacePayment[]
   categoryId: number
   userId: number
   spaceDescriptionId: number
@@ -119,9 +120,9 @@ export interface SpaceAddress {
 
 export interface SpaceOperationTime {
   id: number
-  day: number
-  openTime: number
-  closeTime: number
+  day: string
+  openTime: string
+  closeTime: string
 }
 
 export interface ServiceSpace {
@@ -141,7 +142,7 @@ export interface Package {
   modifiedDate?: string
   createdBy?: string
   modifiedBy?: string
-  title: string
+  type: string
   note: string
   subSpaces: SubSpace[]
 }
@@ -157,7 +158,9 @@ export interface SubSpace {
   imageUrl: string
   numberOfPeople: number
   status: boolean
-  packageId: number
+  packageId?: number
+  packageType?: string
+  package?: Package
 }
 
 export interface Image {
@@ -168,4 +171,16 @@ export interface Image {
   modifiedBy?: string
   fileName: string
   url: string
+}
+
+export interface SpacePayment {
+  id: number
+  createdDate?: string
+  modifiedDate?: string
+  createdBy?: string
+  modifiedBy?: string
+  servicePackName: string
+  price: number
+  expiredTime: Date
+  outOfDate: boolean
 }
