@@ -14,7 +14,6 @@ const ViewButton: FC<Props> = ({ title = 'View', handleClick, id }) => {
 
   const handleClickView = () => {
     if (handleClick) handleClick()
-
     push({
       pathname: `${location.pathname}/${id}/show`,
     })

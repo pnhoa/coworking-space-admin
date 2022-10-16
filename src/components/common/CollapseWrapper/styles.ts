@@ -33,6 +33,9 @@ const CollapseWrapperStyles = styled.div`
       .col-right {
         width: 100%;
       }
+      .col-info {
+        width: 100%;
+      }
     }
   }
 `

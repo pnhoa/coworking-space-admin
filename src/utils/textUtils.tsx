@@ -3,15 +3,16 @@ import {
   ACTIVE_CONST,
   APPROVED_CONST,
   GENDER_CONST,
+  PAID_SPACE_CONST,
   ROLES_CONST,
 } from 'configs/localData'
 import { Category } from 'interfaces'
 import moment from 'moment'
 
 export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('vi-VN', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'VND',
+    currency: 'USD',
   }).format(price)
 }
 
@@ -34,6 +35,11 @@ export const formatCustomerStatus = (enabled: number) => {
   return <Tag color={status?.color}>{status?.text}</Tag>
 }
 
+export const formatSpacePaid = (paid: boolean) => {
+  const status = PAID_SPACE_CONST.find((item) => item.value === paid)
+  return <Tag color={status?.color}>{status?.text}</Tag>
+}
+
 export const formatSpaceApproved = (approved: boolean) => {
   const status = APPROVED_CONST.find((item) => item.value === approved)
   return <Tag color={status?.color}>{status?.text}</Tag>
@@ -47,6 +53,12 @@ export const formatDate = (text?: string) => {
   return dateTime.isSame(moment(), 'year')
     ? dateTime.format(`MMM D, ${formatTime}`)
     : dateTime.format(`MMM D YYYY, ${formatTime}`)
+}
+
+export const formatExpiredDate = (text?: string) => {
+  if (!text) return null
+  const dateTime = moment(text)
+  return  dateTime.format(`MMM D YYYY`)
 }
 
 export const formatMoneySymbol = (num?: number | string, digits = 3) => {
