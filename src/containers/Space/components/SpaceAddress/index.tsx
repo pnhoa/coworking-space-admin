@@ -19,7 +19,7 @@ const SpaceAddressDetailInfo: FC = () => {
       <div className='status-info'>
         <Row gutter={20}>
           <Col span={6} className='fw-500'>Location Name</Col>
-          <Col span={6} >
+          <Col span={14} >
             {record?.spaceAddress.locationName}
           </Col>
         </Row>
