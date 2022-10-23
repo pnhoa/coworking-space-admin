@@ -57,7 +57,7 @@ const SubSpaceTable: FC<Props> = ({serviceSpace}) => {
     {
       title: 'Name',
       dataIndex: 'title',
-      width: 400,
+      width: 300,
     },
     {
       title: 'Number of People',
