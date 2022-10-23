@@ -5,6 +5,7 @@ import {
   BuildOutlined,
   UserOutlined,
   InteractionOutlined,
+  ShoppingOutlined,
 } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 import employeeApi from 'api/employeeApi'
@@ -67,6 +68,13 @@ const SideBar: FC = () => {
       text: 'Service Packs',
       IconCPN: InteractionOutlined,
       url: '/servicePacks',
+    },
+    
+    {
+      key: 'bookings',
+      text: 'Bookings',
+      IconCPN: ShoppingOutlined,
+      url: '/bookings',
     },
     {
       key: 'customers',
