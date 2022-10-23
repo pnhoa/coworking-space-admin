@@ -11,6 +11,7 @@ import { IBasePrivateRoute, IPrivateRoute, TPrivateRoutes } from 'routes/interfa
 import PrivateRoute from './PrivateRoute'
 import ServicePackList from 'containers/ServicePack/List'
 import SpaceDetail from 'containers/Space/Show'
+import BookingList from 'containers/Booking/List'
 
 const routes: TPrivateRoutes = [
   {
@@ -51,6 +52,12 @@ const routes: TPrivateRoutes = [
     Component: ServicePackList,
     exact: true,
     title: 'servicePacks',
+  },
+  {
+    path: '/bookings',
+    Component: BookingList,
+    exact: true,
+    title: 'Bookings',
   },
   {
     path: '/customers',
