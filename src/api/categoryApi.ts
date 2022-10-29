@@ -13,26 +13,6 @@ const categoryApi = {
     return axiosClient.get(url)
   },
 
-  add(data: Category): Promise<Category> {
-    const url = '/categories'
-    const token = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
-    return axiosClient.post(url, data, token)
-  },
-
-  update(data: Category): Promise<Category> {
-    const url = `/categories/${data.id}`
-    const token = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
-    return axiosClient.put(url, data, token)
-  },
-
   remove(id: string): Promise<Category> {
     const url = `/categories/${id}`
     const token = {
@@ -43,7 +23,7 @@ const categoryApi = {
     return axiosClient.delete(url, token)
   },
 
-  async add1(data: Category) {
+  async add(data: Category) {
     const formData = new FormData()
     if(data.thumbnail != null && data.thumbnail.startsWith('blob') ) {
       let blob = await fetch(data.thumbnail).then(r => r.blob());
@@ -53,7 +33,7 @@ const categoryApi = {
       formData.append("file", myFile)
     }
     data.thumbnail = undefined
-    formData.append('theEmployeeDto',
+    formData.append('theCategoryDto',
       new Blob([JSON.stringify(data)], { 
         type: 'application/json'
       }));
@@ -65,6 +45,36 @@ const categoryApi = {
   
     }).then(function (response) {
       notification.info({ message: "Add category successfully!" })
+    })
+    .catch(function (response) {
+      notification.error({ message: response.message })
+    });
+  },
+
+  async update(data: Category)  {
+    const formData = new FormData()
+    if(data.thumbnail != null && data.thumbnail.startsWith('blob') ) {
+      let blob = await fetch(data.thumbnail).then(r => r.blob());
+      const myFile = new File([blob], "image." + (blob.type).replace("image/", ""), {
+        type: blob.type,
+      });
+      formData.append("file", myFile)
+    }
+    data.thumbnail = undefined
+    formData.append('theCategoryDto',
+      new Blob([JSON.stringify(data)], { 
+        type: 'application/json'
+      }));
+
+     await fetch(`${process.env.REACT_APP_URL}/categories/${data.id}`, {
+      method: 'put',
+      body: formData,
+      headers: {
+                "Authorization":  `Bearer ${localStorage.getItem('token')}`
+                },
+    
+    }).then(function (response) {
+      notification.info({ message: "Update category successfully!" })
     })
     .catch(function (response) {
       notification.error({ message: response.message })
