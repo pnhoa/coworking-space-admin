@@ -96,7 +96,7 @@ const EditProfileModal: React.ForwardRefRenderFunction<ModalForwardRefHandle, un
                 <Spin />
               </div>
             ) : (
-              <FormEditProfile isEdit={true} isAdmin={employee.roleCode === "ROLE_ADMIN"} />
+              <FormEditProfile isEdit={true} isAdmin={isEmpty(employee) ? false : employee.roleCode === "ROLE_ADMIN"} />
             )}
           </FormContextCustom.Provider>
         </Form>
