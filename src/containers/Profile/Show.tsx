@@ -6,12 +6,14 @@ import { Employee, ModalForwardRefHandle } from 'interfaces'
 import { useEffect, useRef, useState } from 'react'
 import { formatGender, formatRole } from 'utils/textUtils'
 import ChangePasswordModal from './components/ChangePasswordModal'
+import EditProfileModal from './components/EditProfileModal'
 import { ProfileStyles } from './styles'
 
 const Profile = () => {
   const [profile, setProfile] = useState<Employee>()
 
   const changePasswordModalRef = useRef<ModalForwardRefHandle>(null)
+  const editProfileModalRef = useRef<ModalForwardRefHandle>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -27,6 +29,10 @@ const Profile = () => {
 
   const handleShowModal = () => {
     changePasswordModalRef.current && changePasswordModalRef.current.open()
+  }
+
+  const handleShowEditModal = () => {
+    editProfileModalRef.current && editProfileModalRef.current.open()
   }
 
   return (
@@ -102,8 +108,14 @@ const Profile = () => {
         <Button type='primary' onClick={handleShowModal}>
           Change Password
         </Button>
+        <br></br>
+        <br></br>
+        <Button type='primary' onClick={handleShowEditModal}>
+          Edit Profile
+        </Button>
       </div>
       <ChangePasswordModal ref={changePasswordModalRef} />
+      <EditProfileModal ref={editProfileModalRef} />
     </ProfileStyles>
   )
 }
