@@ -19,7 +19,7 @@ const EditProfileModal: React.ForwardRefRenderFunction<ModalForwardRefHandle, un
   const [visible, setVisible] = useState<boolean>(false)
   const [employee, setEmployee] = useState<Employee>()
 
-  const { push } = useHistory()
+  const history = useHistory()
 
    useEffect(() => {
     (async () => {
@@ -55,7 +55,6 @@ const EditProfileModal: React.ForwardRefRenderFunction<ModalForwardRefHandle, un
 
   const handleClose = () => {
     setVisible(false)
-    form.resetFields()
   }
 
   const onOk = async () => {
@@ -73,7 +72,7 @@ const EditProfileModal: React.ForwardRefRenderFunction<ModalForwardRefHandle, un
         setLoading(false)
         handleClose()
         form.resetFields()
-        push('/')
+        history.go(0)
       })
       .catch((info) => {
         setLoading(false)
