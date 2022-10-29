@@ -11,44 +11,41 @@ interface Props {
 const FormUploadImage = ({ name, label }: Props) => {
   const { record, form } = useContext(FormContextCustom)
 
-  const [base64Url, setBase64Url] = useState(
-    record ? get(record, name) : null
-  )
+
+
+  const [tempImageUrl, setTempImageUrl] = useState(record ? get(record, name) : null)
+
+  const [tempObject, setTempObject] = useState("")
+
 
   useEffect(() => {
     form.setFields([
       {
-        name: name,
-        value: base64Url,
-      },
+        name: name ,
+        value: tempImageUrl,
+      }, 
     ])
-  }, [base64Url]) // eslint-disable-line
+  }, [tempImageUrl]) // eslint-disable-line
 
-  const getBase64 = (file: any) => {
-    return new Promise((resolve) => {
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        resolve(reader.result)
-      }
-    })
-  }
 
-  const handleFileInputChange = (e: any) => {
-    getBase64(e.target.files[0]).then((result) => {
-      setBase64Url(result as string)
-    })
+  const handleFileChange = (e: any) => {
+    const url = window.URL.createObjectURL(e.target.files[0]);
+    if(tempObject !== "") {
+      window.URL.revokeObjectURL(tempObject)
+    }
+    setTempObject(url)   
+    setTempImageUrl(url)
   }
 
   return (
     <>
       <Form.Item name={name} noStyle />
       <label className='fw-700'>{label}</label>
-      <Input className='mt-10 pointer' type='file' onChange={handleFileInputChange} />
-      {base64Url && (
+      <Input className='mt-10 pointer' type='file' onChange={handleFileChange} />
+      {tempImageUrl && (
         <div className='flex-center mt-24'>
           <Image
-            src={base64Url}
+            src={tempImageUrl}
             alt='image'
             style={{
               width: '120px',

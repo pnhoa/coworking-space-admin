@@ -1,3 +1,4 @@
+import { notification } from 'antd'
 import { Category, ListParams } from 'interfaces'
 import axiosClient from './axiosClient'
 
@@ -40,6 +41,34 @@ const categoryApi = {
       },
     }
     return axiosClient.delete(url, token)
+  },
+
+  async add1(data: Category) {
+    const formData = new FormData()
+    if(data.thumbnail != null && data.thumbnail.startsWith('blob') ) {
+      let blob = await fetch(data.thumbnail).then(r => r.blob());
+      const myFile = new File([blob], "image." + (blob.type).replace("image/", ""), {
+        type: blob.type,
+      });
+      formData.append("file", myFile)
+    }
+    data.thumbnail = undefined
+    formData.append('theEmployeeDto',
+      new Blob([JSON.stringify(data)], { 
+        type: 'application/json'
+      }));
+
+    await fetch(`${process.env.REACT_APP_URL}/categories`, {
+    method: 'post',
+    body: formData,
+    headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
+  
+    }).then(function (response) {
+      notification.info({ message: "Add category successfully!" })
+    })
+    .catch(function (response) {
+      notification.error({ message: response.message })
+    });
   },
 }
 export default categoryApi

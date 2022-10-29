@@ -1,3 +1,4 @@
+import { notification } from 'antd'
 import { ApiResponse, Employee, ListParams, ListResponse } from 'interfaces'
 import axiosClient from './axiosClient'
 
@@ -20,26 +21,6 @@ const employeeApi = {
     return axiosClient.get(url)
   },
 
-  add(data: Employee): Promise<Employee> {
-    const url = '/employees'
-    const token = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
-    return axiosClient.post(url, data, token)
-  },
-
-  update(data: Employee): Promise<Employee> {
-    const url = `/employees/${data.id}`
-    const token = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
-    return axiosClient.put(url, data, token)
-  },
-
   remove(id: string): Promise<Employee> {
     const url = `/employees/${id}`
     const token = {
@@ -48,6 +29,64 @@ const employeeApi = {
       },
     }
     return axiosClient.delete(url, token)
+  },
+
+  async update(data: Employee)  {
+    const formData = new FormData()
+    if(data.profilePicture != null && data.profilePicture.startsWith('blob') ) {
+      let blob = await fetch(data.profilePicture).then(r => r.blob());
+      const myFile = new File([blob], "image." + (blob.type).replace("image/", ""), {
+        type: blob.type,
+      });
+      formData.append("file", myFile)
+    }
+    data.profilePicture = undefined
+    formData.append('theEmployeeDto',
+      new Blob([JSON.stringify(data)], { 
+        type: 'application/json'
+      }));
+
+     await fetch(`${process.env.REACT_APP_URL}/employees/${data.id}`, {
+      method: 'put',
+      body: formData,
+      headers: {
+                "Authorization":  `Bearer ${localStorage.getItem('token')}`
+                },
+    
+    }).then(function (response) {
+      notification.info({ message: "Update employee successfully!" })
+    })
+    .catch(function (response) {
+      notification.error({ message: response.message })
+    });
+  },
+
+  async add(data: Employee) {
+    const formData = new FormData()
+    if(data.profilePicture != null && data.profilePicture.startsWith('blob') ) {
+      let blob = await fetch(data.profilePicture).then(r => r.blob());
+      const myFile = new File([blob], "image." + (blob.type).replace("image/", ""), {
+        type: blob.type,
+      });
+      formData.append("file", myFile)
+    }
+    data.profilePicture = undefined
+    formData.append('theEmployeeDto',
+      new Blob([JSON.stringify(data)], { 
+        type: 'application/json'
+      }));
+
+    await fetch(`${process.env.REACT_APP_URL}/employees`, {
+    method: 'post',
+    body: formData,
+    headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
+  
+    }).then(function (response) {
+      notification.info({ message: "Add employee successfully!" })
+    })
+    .catch(function (response) {
+      notification.error({ message: response.message })
+    });
   },
 }
 export default employeeApi
