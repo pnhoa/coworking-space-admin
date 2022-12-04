@@ -1,4 +1,4 @@
-import { Image, Pagination } from 'antd'
+import { Image, notification, Pagination } from 'antd'
 import Table, { ColumnsType } from 'antd/lib/table'
 import employeeApi from 'api/employeeApi'
 import CreateButton from 'components/actions/CreateButton'
@@ -10,7 +10,8 @@ import { Employee, Gender, ListParams, ListResponse, PaginationParams, ROLES } f
 import { parse, stringify } from 'query-string'
 import { FC, useEffect, useMemo, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { formatCustomerStatus, formatGender, formatRole } from 'utils/textUtils'
+import { formatGender, formatRole } from 'utils/textUtils'
+import StatusSelect from './components/StatusSelect'
 import CreateEmployeeModal from './Create'
 import EditEmployeeModal from './Edit'
 import EmployeeFilter from './Filter'
@@ -47,9 +48,18 @@ const EmployeeList: FC = () => {
   }, [search])
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       setLoading(true)
       try {
+        const id = Number(localStorage.getItem('id'))
+        const employee: Employee = await employeeApi.getById(id)
+        if(employee.roleCode !== ROLES.ADMIN) {
+          notification.error({
+            message: `You don't have permission to access employees page.`
+          })
+          push('/')
+          
+        }
         const { data, pagination }: ListResponse<Employee> = await employeeApi.getAll(queryParams)
         setEmployeeList(data)
         setPagination(pagination)
@@ -153,7 +163,9 @@ const EmployeeList: FC = () => {
       title: 'Active Status',
       dataIndex: 'enabled',
       width: 140,
-      render: (data) => formatCustomerStatus(data),
+      render: (enabled, record) => (
+        <StatusSelect enabled={enabled} userId={record.id || 1}  refetch={() => setRefetch(!refetch)} />
+      ),
     },
     {
       title: 'Role',

@@ -8,7 +8,8 @@ import { Customer, Gender, ListParams, ListResponse, PaginationParams } from 'in
 import { parse, stringify } from 'query-string'
 import { FC, useEffect, useMemo, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { formatCustomerStatus, formatGender } from 'utils/textUtils'
+import { formatGender } from 'utils/textUtils'
+import StatusSelect from './components/StatusSelect'
 import CustomerFilter from './Filter'
 import ListLayoutStyles from './styles'
 
@@ -144,7 +145,9 @@ const CustomerList: FC = () => {
       title: 'Active Status',
       dataIndex: 'enabled',
       width: 140,
-      render: (data) => formatCustomerStatus(data),
+      render: (enabled, record) => (
+        <StatusSelect enabled={enabled} userId={record.id || 1}  refetch={() => setRefetch(!refetch)} />
+      ),
     },
     {
       fixed: 'right',

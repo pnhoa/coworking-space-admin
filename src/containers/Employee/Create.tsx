@@ -28,13 +28,38 @@ const CreateEmployeeModal: FC<Props> = ({
       .validateFields()
       .then(async (values) => {
         const formatValues = omit(values, ['confirm']) as Employee
-        return await employeeApi.add({ ...formatValues })
+        const formData = await employeeApi.add({ ...formatValues })
+
+        
+      await fetch(`${process.env.REACT_APP_URL}/employees`, {
+        method: 'post',
+        body: formData,
+        headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
+        })
+        .then( (response) =>  response.json() )
+        .then((data) => {
+          if(data.status === 'BAD_REQUEST') {
+            setLoading(false)
+            notification.error({
+              message: data.message,
+            });
+          } else {
+            notification.success({
+              message: 'Add employee successfully!',
+            });
+            setLoading(false)
+            closeModal()
+            form.resetFields()
+            refetch()
+            
+          }
+        })
+        .catch(function (response) {
+          notification.error({ message: response.message })
+        });
+
       })
       .then(async () => {
-        setLoading(false)
-        closeModal()
-        form.resetFields()
-        refetch()
       })
       .catch((info) => {
         setLoading(false)

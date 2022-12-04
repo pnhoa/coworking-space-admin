@@ -6,11 +6,15 @@ export const ACTIVE_CONST = [
     value: 0,
     text: 'Inactive',
     color: 'red',
+    colorText: '#F75D81',
+    backgroundColor: '#ffefff',
   },
   {
     value: 1,
     text: 'Active',
     color: 'green',
+    colorText: '#52c41a',
+    backgroundColor: '#f6ffed',
   },
 ]
 

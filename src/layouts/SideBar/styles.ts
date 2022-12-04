@@ -59,8 +59,8 @@ const SideBarStyles = styled.div`
 
       & > img {
         cursor: pointer;
-        width: 64px;
-        height: 64px;
+        width: 210px;
+        height: 48px;
       }
     }
   }
