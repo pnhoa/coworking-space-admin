@@ -31,7 +31,7 @@ const LoginPage: FC = () => {
       </div>
       <div className='container'>
         <div className='content'>
-          <span className='content-header'>Welcome back</span>
+          <span className='content-header'>Welcome back to <strong>TOPSPACE</strong></span>
           <header className='content-title'>Login to your account</header>
           <Form
             name='normal_login'
@@ -74,7 +74,7 @@ const LoginPage: FC = () => {
             <Form.Item>
               <Button
                 type='primary'
-                style={{ width: 360 }}
+                style={{ width: 360, background: '#019164' }}
                 htmlType='submit'
                 className='login-form-button'
                 loading={loading}

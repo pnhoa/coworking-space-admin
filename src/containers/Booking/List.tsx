@@ -84,16 +84,22 @@ const BookingList: FC = () => {
     {
       title: 'id',
       dataIndex: 'id',
-      width: 80,
+      width: 40,
+      sorter: (a: Booking, b: Booking) => a.id - b.id,
     },
     {
       title: 'Name',
       dataIndex: 'name',
-      width: 200,
+      width: 150,
     },
     {
       title: 'Email',
       dataIndex: 'email',
+      width: 150,
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phoneNumber',
       width: 150,
     },
     {
