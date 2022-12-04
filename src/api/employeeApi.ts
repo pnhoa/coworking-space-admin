@@ -74,19 +74,19 @@ const employeeApi = {
     formData.append('theEmployeeDto',
       new Blob([JSON.stringify(data)], { 
         type: 'application/json'
-      }));
+    }));
 
-    await fetch(`${process.env.REACT_APP_URL}/employees`, {
-    method: 'post',
-    body: formData,
-    headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
-  
-    }).then(function (response) {
-      notification.info({ message: "Add employee successfully!" })
-    })
-    .catch(function (response) {
-      notification.error({ message: response.message })
-    });
+    return formData;
+  },
+
+  active(userId: number): Promise<Employee> {
+    const url = `/employees/active/${userId}`
+    const token = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }
+    return axiosClient.put(url, token)
   },
 }
 export default employeeApi

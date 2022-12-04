@@ -29,5 +29,15 @@ const customerApi = {
     }
     return axiosClient.delete(url, token)
   },
+
+  active(userId: number): Promise<Customer> {
+    const url = `/customers/active/${userId}`
+    const token = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }
+    return axiosClient.put(url, token)
+  },
 }
 export default customerApi
