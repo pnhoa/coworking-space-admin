@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: 'https://top-coworking-spcace.herokuapp.com/api',
   headers: {
     'Content-Type': 'application/json',
   },

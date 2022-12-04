@@ -38,7 +38,7 @@ const categoryApi = {
         type: 'application/json'
       }));
 
-    await fetch(`${process.env.REACT_APP_URL}/categories`, {
+    await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories`, {
     method: 'post',
     body: formData,
     headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
@@ -66,7 +66,7 @@ const categoryApi = {
         type: 'application/json'
       }));
 
-     await fetch(`${process.env.REACT_APP_URL}/categories/${data.id}`, {
+     await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories/${data.id}`, {
       method: 'put',
       body: formData,
       headers: {

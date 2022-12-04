@@ -46,7 +46,7 @@ const employeeApi = {
         type: 'application/json'
       }));
 
-     await fetch(`${process.env.REACT_APP_URL}/employees/${data.id}`, {
+     await fetch(`https://top-coworking-spcace.herokuapp.com/api/employees/${data.id}`, {
       method: 'put',
       body: formData,
       headers: {
