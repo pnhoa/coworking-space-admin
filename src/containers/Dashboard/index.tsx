@@ -1,10 +1,11 @@
 import { Col, Row } from 'antd'
 import CategoryStatistics from './Chart'
 import TotalCustomer from './components/TotalCustomer'
-import TotalOrders from './components/TotalOrders'
+import TotalBookings from './components/TotalBookings'
 import TotalRevenue from './components/TotalRevenue'
-import TotalSales from './components/TotalSales'
-import BestSellingProducts from './ProductSection/BestSellingProducts'
+import TotalSpaces from './components/TotalSpaces'
+import BestSellingSpaces from './SpaceSection/BestSellingSpaces'
+import LatestSpaces from './LatestSpaceSection/LatestSpaces'
 
 const DashboardPage = () => {
   return (
@@ -21,10 +22,10 @@ const DashboardPage = () => {
           </Row>
           <Row gutter={20} className='mt-20'>
             <Col span={12}>
-              <TotalSales />
+              <TotalSpaces />
             </Col>
             <Col span={12}>
-              <TotalOrders />
+              <TotalBookings />
             </Col>
           </Row>
         </Col>
@@ -34,9 +35,10 @@ const DashboardPage = () => {
       </Row>
       <Row gutter={[20, 20]} className='mt-20'>
         <Col span={10}>
-          <BestSellingProducts />
+          <BestSellingSpaces />
         </Col>
         <Col span={14}>
+          <LatestSpaces />
         </Col>
       </Row>
     </>

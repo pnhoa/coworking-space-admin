@@ -31,7 +31,7 @@ const CreateEmployeeModal: FC<Props> = ({
         const formData = await employeeApi.add({ ...formatValues })
 
         
-      await fetch(`${process.env.REACT_APP_URL}/employees`, {
+      await fetch(`https://top-coworking-spcace.herokuapp.com/api/employees`, {
         method: 'post',
         body: formData,
         headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },

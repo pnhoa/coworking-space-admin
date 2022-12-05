@@ -26,13 +26,37 @@ const CreateCategoryModal: FC<Props> = ({
     form
       .validateFields()
       .then(async (values) => {
-        return await categoryApi.add({ ...values })
+        const formData = await categoryApi.add({ ...values })
+
+        await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories`, {
+        method: 'post',
+        body: formData,
+        headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
+      
+        })
+        .then( (response) =>  response.json() )
+        .then((data) => {
+          if(data.status === 'BAD_REQUEST') {
+            setLoading(false)
+            notification.error({
+              message: data.message,
+            });
+          } else {
+            notification.success({
+              message: 'Add category successfully!',
+            });
+            setLoading(false)
+            closeModal()
+            form.resetFields()
+            refetch()
+            
+          }
+        })
+        .catch(function (response) {
+          notification.error({ message: response.message })
+        });
       })
       .then(async () => {
-        setLoading(false)
-        closeModal()
-        form.resetFields()
-        refetch()
       })
       .catch((info) => {
         setLoading(false)

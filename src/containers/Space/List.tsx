@@ -1,4 +1,4 @@
-import { Image, Pagination } from 'antd'
+import { Button, Image, notification, Pagination } from 'antd'
 import Table, { ColumnsType } from 'antd/lib/table'
 import categoryApi from 'api/categoryApi'
 import spaceApi from 'api/spaceApi'
@@ -149,6 +149,16 @@ const SpaceList: FC = () => {
     setRefetch(!refetch)
   }
 
+  const handleExpiredSpace = async () => {
+    const result = await spaceApi.processExpiredSpace()
+    notification.info({
+      message: result.message,
+      duration: 2
+    })
+    console.log(result)
+    setRefetch(!refetch)
+  }
+
   const columns = [
     {
       title: 'Image',
@@ -270,6 +280,7 @@ const SpaceList: FC = () => {
     <ListLayoutStyles>
       <div>
         <PageTitle title='Spaces' />
+        <Button style={{marginBottom: '20px'}} onClick={handleExpiredSpace}>Process Expired Space</Button>
         <SpaceFilter
           onSubmitFilter={handleFilterChange}
           onClearFilter={handleClearFilter}
