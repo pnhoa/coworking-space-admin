@@ -12,7 +12,7 @@ const CategoryStatistics = () => {
   ])
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
         const data = await statisticsApi.getCategoriesStatistics()
         setStatistics(data)

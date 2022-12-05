@@ -14,6 +14,18 @@ const spaceApi = {
       },
     }
   },
+  async getAllForDashboard(params: ListParams): Promise<ListResponse<Space>> {
+    const data: ApiResponse<Space> = await axiosClient.get('/spaces/overview?approved=false&&notApproved=false', { params })
+
+    return {
+      data: data.content,
+      pagination: {
+        page: data.number + 1,
+        limit: data.size,
+        total: data.totalElements,
+      },
+    }
+  },
   async getAllDetail(params: ListParams): Promise<ListResponse<Space>> {
     const data: ApiResponse<Space> = await axiosClient.get('/spaces', { params })
 

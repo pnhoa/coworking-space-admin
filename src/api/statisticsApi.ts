@@ -6,19 +6,19 @@ const reportApi = {
     return axiosClient.get('/statistics/revenue', { params })
   },
 
-  getTotalSales(params?: ReportParams): Promise<number> {
-    return axiosClient.get('/statistics/totalSales', { params })
+  getTotalSpaces(params?: ReportParams): Promise<number> {
+    return axiosClient.get('/statistics/space/count', { params })
   },
 
-  getTotalOrders(params?: ReportParams): Promise<number> {
-    return axiosClient.get('/statistics/totalOrders', { params })
+  getTotalBookings(params?: ReportParams): Promise<number> {
+    return axiosClient.get('/statistics/booking', { params })
   },
 
   getTotalCustomer(params?: ReportParams): Promise<number> {
     return axiosClient.get('/customers/count', { params })
   },
 
-  getTopProduct(params?: ReportParams): Promise<any[]> {
+  getTopSpace(params?: ReportParams): Promise<any[]> {
     return axiosClient.get('/statistics/space', { params })
   },
 

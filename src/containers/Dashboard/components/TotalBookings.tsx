@@ -7,21 +7,21 @@ interface Props {
   timeQuery?: ReportParams
 }
 
-const TotalSales = ({ timeQuery }: Props) => {
-  const [totalSales, setTotalSales] = useState(0)
+const TotalBookings = ({ timeQuery }: Props) => {
+  const [totalBookings, setTotalBookings] = useState(0)
 
   useEffect(() => {
     ;(async () => {
       try {
-        const count = await statisticsApi.getTotalSales(timeQuery)
-        setTotalSales(count)
+        const count = await statisticsApi.getTotalBookings(timeQuery)
+        setTotalBookings(count)
       } catch (error) {
-        console.log('Failed to fetch', error)
+        console.log('Failed to fetch')
       }
     })()
   }, [timeQuery])
 
-  return <StatisticsCard title='Total Sales' count={totalSales} />
+  return <StatisticsCard title='Total Bookings' count={totalBookings} />
 }
 
-export default TotalSales
+export default TotalBookings
