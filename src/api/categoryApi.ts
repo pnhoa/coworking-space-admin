@@ -38,17 +38,8 @@ const categoryApi = {
         type: 'application/json'
       }));
 
-    await fetch(`${process.env.REACT_APP_URL}/categories`, {
-    method: 'post',
-    body: formData,
-    headers: { "Authorization":  `Bearer ${localStorage.getItem('token')}` },
-  
-    }).then(function (response) {
-      notification.info({ message: "Add category successfully!" })
-    })
-    .catch(function (response) {
-      notification.error({ message: response.message })
-    });
+    return formData;
+    
   },
 
   async update(data: Category)  {
@@ -66,7 +57,7 @@ const categoryApi = {
         type: 'application/json'
       }));
 
-     await fetch(`${process.env.REACT_APP_URL}/categories/${data.id}`, {
+     await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories/${data.id}`, {
       method: 'put',
       body: formData,
       headers: {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { formatPrice } from 'utils/textUtils'
 import ReportCard from '../components/ReportCard'
 
-const BestSellingProducts = () => {
+const BestSellingSpaces = () => {
   const [bestSellingProductList, setBestSellingProductList] = useState<any[]>()
   const [loading, setLoading] = useState(false)
 
@@ -13,7 +13,7 @@ const BestSellingProducts = () => {
     ;(async () => {
       try {
         setLoading(true)
-        const data = await statisticsApi.getTopProduct()
+        const data = await statisticsApi.getTopSpace()
         setBestSellingProductList(data)
         setLoading(false)
       } catch (error) {
@@ -29,7 +29,7 @@ const BestSellingProducts = () => {
       dataIndex: 'productName',
     },
     {
-      title: 'Quantity',
+      title: 'Number of Booking',
       dataIndex: 'quantity',
     },
     {
@@ -51,4 +51,4 @@ const BestSellingProducts = () => {
   )
 }
 
-export default BestSellingProducts
+export default BestSellingSpaces

@@ -72,6 +72,11 @@ const CategoryList: FC = () => {
 
   const columns = [
     {
+      title: 'ID',
+      dataIndex: 'id',
+      width: 50,
+    },
+    {
       title: 'Image',
       dataIndex: 'thumbnail',
       width: 200,
@@ -89,11 +94,7 @@ const CategoryList: FC = () => {
         />
       ),
     },
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      width: 100,
-    },
+    
     {
       title: 'Name',
       dataIndex: 'name',
