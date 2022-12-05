@@ -36,6 +36,11 @@ const LatestSpaces = () => {
 
   const columns = [
     {
+      title: 'ID',
+      dataIndex: 'id',
+      width: 50,
+    },
+    {
       title: 'Image',
       dataIndex: 'largeImage',
       key: 'largeImage',

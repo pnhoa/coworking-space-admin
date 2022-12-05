@@ -107,5 +107,9 @@ const spaceApi = {
 
     return await axiosClient.get('/spaces/districts')
   },
+  async processExpiredSpace(): Promise<any> {
+    const url = `/spaces/processExpiredSpace`
+    return await axiosClient.get(url)
+  },
 }
 export default spaceApi
