@@ -42,13 +42,39 @@ const EditCategoryModal: FC<Props> = ({
           ...values,
           id: category?.id,
         }
-        return await categoryApi.update(formValues)
+        const formData = await categoryApi.update(formValues)
+        await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories/${category?.id}`, {
+        method: 'put',
+        body: formData,
+        headers: {
+                  "Authorization":  `Bearer ${localStorage.getItem('token')}`
+                  },
+      
+      })
+      .then( (response) =>  response.json() )
+        .then((data) => {
+          if(data.status === 'BAD_REQUEST') {
+            setLoading(false)
+            notification.error({
+              message: data.message,
+              duration: 2
+            });
+          } else {
+            notification.success({
+              message: 'Update category successfully!',
+            });
+            setLoading(false)
+            closeModal()
+            form.resetFields()
+            refetch()
+            
+          }
+        })
+        .catch(function (response) {
+          notification.error({ message: response.message })
+        });
       })
       .then(async () => {
-        setLoading(false)
-        closeModal()
-        form.resetFields()
-        refetch()
       })
       .catch((info) => {
         setLoading(false)
