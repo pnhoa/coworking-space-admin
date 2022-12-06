@@ -11,6 +11,12 @@ interface Props {
 const TotalRevenue = ({ timeQuery }: Props) => {
   const [totalRevenue, setTotalRevenue] = useState(0)
 
+  const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  const d = new Date();
+  let mon = month[d.getMonth()];
+  let year = d.getFullYear();
+
   useEffect(() => {
     ;(async () => {
       try {
@@ -22,7 +28,7 @@ const TotalRevenue = ({ timeQuery }: Props) => {
     })()
   }, [timeQuery])
 
-  return <StatisticsCard title='Total Revenue' customCount={formatPrice(totalRevenue)} />
+  return <StatisticsCard title={'Total Revenue ' + mon + '-' + year} customCount={formatPrice(totalRevenue)} />
 }
 
 export default TotalRevenue

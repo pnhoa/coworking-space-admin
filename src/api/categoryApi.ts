@@ -1,4 +1,3 @@
-import { notification } from 'antd'
 import { Category, ListParams } from 'interfaces'
 import axiosClient from './axiosClient'
 
@@ -57,19 +56,7 @@ const categoryApi = {
         type: 'application/json'
       }));
 
-     await fetch(`https://top-coworking-spcace.herokuapp.com/api/categories/${data.id}`, {
-      method: 'put',
-      body: formData,
-      headers: {
-                "Authorization":  `Bearer ${localStorage.getItem('token')}`
-                },
-    
-    }).then(function (response) {
-      notification.info({ message: "Update category successfully!" })
-    })
-    .catch(function (response) {
-      notification.error({ message: response.message })
-    });
+    return formData;
   },
 }
 export default categoryApi
